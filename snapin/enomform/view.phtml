@@ -1,0 +1,143 @@
+<style type="text/css">
+    h1 {
+        margin-top:0;
+    }
+    .form-fieldsets {
+        margin-left:30px;
+    }
+    .form-fieldsets h2 {
+        margin-left:-10px;
+    }
+</style>
+
+<div class="alert ce-alert ce-alert-error" style="<?php echo (!isset($this->err) || trim($this->err) == "") ? "display:none;" :"" ?>">
+    <a class="close" data-dismiss="alert">×</a>
+    <?php echo $this->err; ?>
+</div>
+
+<?php if ( isset($this->successMessage) ) { ?>
+    <div class="alert ce-alert ce-alert-success">
+        <a class="close" data-dismiss="alert">×</a>
+        <?php echo $this->unescape($this->successMessage); ?>
+    </div>
+<?php  } ?>
+
+<h1><?php echo $this->user->lang("Create your eNom reseller account");?></h1>
+
+<div class="alert ce-alert ce-alert-info" style="<?php echo (!isset($this->snapinHeader) || trim($this->snapinHeader) == "") ? "display:none;" :"" ?>">
+    <?php echo $this->unescape($this->snapinHeader); ?>
+</div>
+
+<form method='post' id="submit_ticket" action='index.php?fuse=admin&action=snapin&controller=snapins&plugin=enomform&v=view'>
+    <input type="hidden" name="accounttype" value="1" />
+
+    <div class="form-fieldsets">
+
+        <h2><?php echo $this->user->lang('Contact Information'); ?></h2>
+
+        <div class="row">
+            <fieldset class="ce-fieldset" >
+                <label><?php echo $this->user->lang('Organization'); ?></label>
+                <input  type="text" name="org" id="org" value="<?php echo $this->organization; ?>" />
+            </fieldset>
+            <fieldset class="ce-fieldset" >
+                <label><?php echo $this->user->lang('Title'); ?></label>
+                <input  type="text" name="title" id="title" value="<?php echo $this->title; ?>" />
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="ce-fieldset">
+            <label><?php echo $this->user->lang('First Name'); ?></label>
+            <input  type="text" name="fname" id="fname" value="<?php echo $this->firstName; ?>" />
+            </fieldset>
+
+            <fieldset class="ce-fieldset">
+            <label><?php echo $this->user->lang('Last Name'); ?></label>
+            <input  type="text" name="lname" id="lname" value="<?php echo $this->lastName; ?>" />
+            </fieldset>
+
+            <fieldset class="ce-fieldset">
+            <label><?php echo $this->user->lang('Email'); ?></label>
+            <input  type="text" name="email" id="email" value="<?php echo $this->email; ?>" />
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="ce-fieldset">
+                <label><?php echo $this->user->lang('Address'); ?></label>
+                <input  type="text" class="span6" name="address" id="address" value="<?php echo $this->address; ?>" />
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="ce-fieldset">
+                <label><?php echo $this->user->lang('City'); ?></label>
+                <input  class="input-mini" type="text" name="city" id="city" value="<?php echo $this->city; ?>" />
+            </fieldset>
+
+            <fieldset class="ce-fieldset">
+                <label><?php echo $this->user->lang('State'); ?></label>
+                <input  class="input-medium" type="text" name="state" id="state" value="<?php echo $this->state; ?>" />
+            </fieldset>
+
+            <fieldset class="ce-fieldset">
+                <label><?php echo $this->user->lang('Country'); ?></label>
+                <select name="country" id="country" >
+                    <?php echo $this->unescape($this->countries);?>
+                </select>
+            </fieldset>
+
+            <fieldset class="ce-fieldset">
+                <label><?php echo $this->user->lang('Zip Code'); ?></label>
+                <input  class="input-medium" type="text" name="zip" id="zip" value="<?php echo $this->zipcode; ?>" />
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset class="ce-fieldset">
+                <label><?php echo $this->user->lang('Phone'); ?></label>
+                <input  type="text" name="phone" id="phone" value="<?php echo $this->phone; ?>" />
+            </fieldset>
+        </div>
+
+        <hr style="margin-top:10px;margin-bottom:10px;color:#eee;width:400px;" />
+
+        <h2><?php echo $this->user->lang('Security Information'); ?></h2>
+
+        <div class="row">
+            <fieldset class="ce-fieldset">
+                <label><?php echo $this->user->lang('Preferred Username'); ?></label>
+                <input  type="text" name="username" id="username" value="<?php echo $this->id; ?>" />
+            </fieldset>
+            <fieldset class="ce-fieldset">
+                <label><?php echo $this->user->lang('Password'); ?></label>
+                <input  type="text" name="password" id="password" value="<?php echo $this->pw; ?>" />
+            </fieldset>
+        </div>
+
+        <div class="row">
+
+            <fieldset class="ce-fieldset">
+                <label><?php echo $this->user->lang('Secret Word Type'); ?></label>
+                <select name="secrettype" id="secrettype">
+                    <option value="smaiden">Mother's Maiden Name</option>
+                    <option value="sbirth" <?php echo $this->cob; ?>>City of Birth</option>
+                    <option value="ssocial" <?php echo $this->ld4; ?>>Last 4 Digits of Social Security Number</option>
+                    <option value="shigh" <?php echo $this->hs; ?>>Full Name of High School</option>
+                </select>
+            </fieldset>
+
+            <fieldset class="ce-fieldset">
+                <label><?php echo $this->user->lang('Secret Word'); ?></label>
+                <input  type="text" name="sword" id="sword" value="<?php echo $this->ans; ?>" />
+            </fieldset>
+
+        </div>
+
+    </div>
+
+    <div class="form-actions">
+        <input type="submit" name="submit" class="btn" value='<?php echo $this->user->lang('Submit Application'); ?>' />
+    </div>
+</form>

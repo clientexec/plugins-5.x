@@ -1,0 +1,30 @@
+<span class="grid-meta" id="buycpanel-grid-metadata"></span>
+<div id="gridheader" class="blue-box">
+    <table class="automation">
+        <tbody>
+            <tr>
+            	<td>
+                    <button id="addButton" class="rich-button">
+                        <span id="addButtonText"><?php echo $this->user->lang("Add License");?></span>
+                    </button>
+                </td>
+                <td align="right"><label><?php echo $this->user->lang("Filter");?></label></td>
+                <td align="left" style="width:125px;">
+                    <select class="dropdown-select" style="width:125px;" id='buycpanel-grid-filterbystatus'>
+                        <option value="all"><?php echo $this->user->lang("All");?></option>
+                        <option selected="selected" value="active"><?php echo $this->user->lang("Active");?></option>
+                        <option value="pending"><?php echo $this->user->lang("Pending");?></option>
+                        <option value="cancelled"><?php echo $this->user->lang("Cancelled");?></option>
+                        <option value="terminated"><?php echo $this->user->lang("Terminated");?></option>
+                        <option value="unverified"><?php echo $this->user->lang("Unverified");?></option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="buycpanel-grid"></div>
+<div id="buycpanel-grid-footer" style="display:none;">
+    <button class="rich-button" id="cancelButton"><span><?php echo $this->user->lang("Cancel License(s)"); ?></span></button>
+</div>

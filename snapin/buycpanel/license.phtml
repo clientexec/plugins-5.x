@@ -1,0 +1,37 @@
+<table cellpadding="5" cellspacing="0">
+	<tr>
+		<td>
+			<label class="fieldlabel"><?php echo $this->user->lang("IP Address");?></label>
+			<input class="required" type="text" name="ipaddress" style="padding-right:20px;" value="<?php echo $this->ip;?>" />
+		</td>
+	</tr>
+	<?php if ( $this->editing == false ) { ?>
+	<tr>
+		<td colspan="3">
+			<label class="fieldlabel"><?php echo $this->user->lang("Domain");?></label>
+			<input class="required" type="text" name="domain" style="padding-right:20px;" value="<?php echo $this->description;?>" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<label class="fieldlabel"><?php echo $this->user->lang("License Type");?></label>
+			<select name="licensetype">
+				<option value="10">cPanel VPS Optimized Monthly</option>
+				<option value="20">cPanel VPS Optimized Yearly</option>
+				<option value="0">cPanel Dedicated Monthly</option>
+				<option value="3">cPanel Dedicated Yearly</option>
+			</select>
+		</td>
+	</tr>
+	<?php } ?>
+</table>
+
+<?php if ( $this->editing == true ) { ?>
+<input type="hidden" name="currentip" value="<?php echo $this->ip;?>" />
+<?php } ?>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		clientexec.postpageload('.richwindow');
+	});
+</script>

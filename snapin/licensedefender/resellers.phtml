@@ -1,0 +1,70 @@
+<style>
+    .licensedetails label {
+        display: inline;
+        color: green;
+        font-weight: bold;
+        padding-left: 15px;
+    }
+
+    .licensedetails {
+        padding-left: 21px;
+        padding-bottom: 10px;
+    }
+    .detailheader {
+        padding-top: 10px;
+        font-weight: bold;
+        padding-left: 15px;
+        margin-bottom: -10px;
+    }
+</style>
+
+<ul class="nav nav-tabs">
+    <?php $url = 'index.php?fuse=admin&view=viewsnapin&controller=snapins&plugin=licensedefender&v=licenses'; ?>
+    <li id="">
+        <span class="clickable-link" data-url="<?php echo $url;?>">Licenses</span>
+    </li>
+    <li id="" class="active">
+        <span class="clickable-link" data-url="#">Resellers</span>
+    </li>
+</ul>
+
+<div class="alert alert-info" style="margin-bottom:5px;">
+    <span  style="color:black;font-size: 13px;">Username: <a style='cursor:pointer' title="Remove all filters" onclick='licensedefender.removeAllFilters();'><?php echo $this->username; ?></a></span>
+    <span id="loggedinas" style="color:gray;font-size: 13px;"></span>
+    <span id="searchkey" style="font-size: 13px;padding-right:3px;"></span>
+    <span id="totallicenses">
+        <span style="color: rgb(231, 255, 223);"> | </span>
+        Total Resellers (<span id="totalresellers_count">NA</span>)
+    </span>
+    <span id="usedlicenses">
+        <span style="color: rgb(231, 255, 223);"> | </span>
+        Allotted (<span id="totallicenses_count">NA</span>)
+    </span>
+
+    <span id="remaininglicenses">
+    <span style="color: rgb(231, 255, 223);"> | </span>
+        Issued (<span id="usedlicenses_count">NA</span>)
+    </span>
+    <div style="float:right; width: 350px;font-size: 12px;position:relative;top:-5px;font-weight: bold;">
+        Search Reseller: <input type="text"  value="" onkeydown="if(event.keyCode==13) licensedefender.searchReseller();" id="searchReseller" name="searchReseller" />&nbsp;&nbsp;&nbsp;
+    </div>
+</div>
+
+<span class="grid-meta" id="resellerPanel-grid-metadata"></span>
+<div id="gridheader" class="blue-box">
+    <table class="automation">
+        <tbody>
+            <tr>
+            	<td><button id="addButton" class="rich-button"><span id="addButtonText" class="buttontext"><?php echo $this->user->lang("Add Reseller");?></span></button></td>
+                <td align="left" style="width:60px">
+                    <select id='resellerPanel-grid-filter' class="change-grid-showrecords" style='width:60px;'><option value='5'>5</option><option value='10'>10</option><option value='25'>25</option><option value='50'>50</option><option value='150'>150</option><option value='300'>300</option></select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="resellerPanel-grid"></div>
+<div id="resellerPanel-grid-footer" style="display:none;">
+    <button class="rich-button" id="deleteButton"><span><?php echo $this->user->lang("Delete Reseller"); ?></span></button>
+</div>

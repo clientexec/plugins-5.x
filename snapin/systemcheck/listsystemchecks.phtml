@@ -1,0 +1,123 @@
+<style>
+.systemcheck-welcome h2 {
+	margin-bottom:0;
+	padding-bottom:0;
+}
+.systemcheck-welcome {
+	padding-left:25px;
+	padding-bottom:20px;
+	padding-top:10px;
+	margin-bottom: 15px;
+	border-bottom: 2px solid #fff;
+	margin-left:-10px;
+	margin-right:-10px;
+	background-color: #E7F5FF
+}
+.systemcheck-list {
+	padding-left:15px;
+	padding-right:15px;
+}
+.systemcheck-footer{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-left:25px;
+	padding-right:15px;
+    /*height:20px;*/
+}
+.systemcheck-list li {
+	margin-bottom: 4px;
+}
+
+.systemcheck-list ol {
+    counter-reset: li; /* Initiate a counter */
+    list-style: none; /* Remove default numbering */
+    *list-style: decimal; /* Keep using default numbering for IE6/7 */
+    font: 15px;
+    padding: 0;
+}
+
+.systemcheck-list ol a{
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em 2em;
+    *padding: .4em;
+    margin: .5em 0;
+    background: #fff;
+    color: #444;
+    text-decoration: none;
+    border-radius: .3em;
+    transition: all .3s ease-out;
+    border-bottom: 0;
+}
+
+.systemcheck-list ol li.completed a,
+.systemcheck-list ol a:hover{
+    background: #eee;
+    color:#888;
+}
+
+.systemcheck-list ol li.completed a:before,
+.systemcheck-list ol a:hover:before{
+    /*transform: rotate(360deg);*/
+    background: #ddd;
+    color:#888;
+}
+
+.systemcheck-list ol a:before{
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    left: -1.3em;
+    top: 50%;
+    color:#fff;
+    margin-top: -1.3em;
+    background: #f90;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border: .3em solid #fff;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2em;
+    /*transition: all .3s ease-out;*/
+}
+
+.systemcheck-list ol a:hover{
+	border-bottom: 0 !important;
+}
+
+</style>
+
+<div class="systemcheck-welcome">
+    <h2><?php echo $this->user->lang('Welcome to Clientexec'); ?>!</h2>
+    <?php echo $this->user->lang('There are just a couple more steps to complete then you are off and running.'); ?>
+</div>
+<div class="systemcheck-list">
+
+	<?php if (count($this->checkitems) > 0) { ?>
+
+		<?php echo $this->user->lang('Follow the links for the given configurations you need to complete before accepting orders'); ?>
+		<ol style="margin-top:15px;">
+		  <?php foreach($this->checkitems as $item) {
+            $li_class = "";
+            if ($item['completed']) {
+                $item['url'] = "#";
+                $item['name'] = "<span style='text-decoration: line-through;'>".$item['name']."</span>";
+                $li_class = "completed";
+            }
+            ?>
+		  	<li class="<?php echo $li_class;?>"><a href="<?php echo $item['url'];?>"><?php echo $item['name'];?></a><!-- <?php echo $item['desc'];?> --></li>
+		  <?php } ?>
+		</ol>
+
+	<?php } else { ?>
+
+	<?php } ?>
+
+</div>
+<div class="systemcheck-footer">
+    <!-- <a href="#" class="pull-right" style="position: relative;right: 20px;">Close and ignore suggetions</a> -->
+	<!-- <div class="ce-alert ce-alert-info">
+	If you have any issues with configuring any of the above settings please do not hesitiate from submitting a <a href="test">support request</a>
+	</div> -->
+</div>

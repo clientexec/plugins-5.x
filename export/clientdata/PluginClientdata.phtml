@@ -1,0 +1,38 @@
+<b><?php echo $this->user->lang('Select which fields you wish to export and press the button to download the file'); ?>:</b><br />
+<table>
+    <?php foreach ( $this->fields as $field ) { ?>
+    <tr>
+        <td valign="top">
+            <input style="margin-right:5px;" type="checkbox" name="clients_field_<?php echo $field['fieldName']; ?>" <?php echo $field['checked']; ?> /><?php echo $field['fieldName']; ?><br />
+        </td>
+    </tr>
+    <?php } ?>
+</table><br />
+<input type="hidden" name="passphrase" value="" />
+<button class="rich-button" id="exportButton"><span><?php echo $this->user->lang("Download .csv"); ?></span></button>
+<script type="text/javascript">
+    function rerquestPassphrase(){
+        if(document.forms['ImportExportPlugin'].elements['clients_field_Credit__Card__Number'].checked){
+            //The line inside does not work in Internet Explorer
+            if(/*@cc_on!@*/true){
+                Ext.MessageBox.getDialog().body.child('input').dom.type='password';
+            }
+            Ext.MessageBox.prompt('Validate Credit Card', 'Enter your passphrase:', addPassphrase);
+            return false;
+        }
+    }
+
+    function addPassphrase(btn, text){
+        //The line inside does not work in Internet Explorer
+        if(/*@cc_on!@*/true){
+            Ext.MessageBox.getDialog().body.child('input').dom.type='text';
+        }
+        if(btn=="ok"){
+            document.forms['ImportExportPlugin'].elements['clients_field_Credit__Card__Number'].checked = true;
+            document.forms['ImportExportPlugin'].elements['passphrase'].value = text;
+        }else{
+            document.forms['ImportExportPlugin'].elements['clients_field_Credit__Card__Number'].checked = false;
+            document.forms['ImportExportPlugin'].elements['passphrase'].value = '';
+        }
+    }
+</script>

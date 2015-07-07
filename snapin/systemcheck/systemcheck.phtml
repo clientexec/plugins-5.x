@@ -1,0 +1,141 @@
+<?php /*
+<!-- If I'm in ticket view I need more padding on top -->
+<!-- depending if someone is viewing with me or not -->*/
+?>
+<style>
+.bannerBttnWrapper{
+	margin-left: 100%;
+	position: relative;
+	left: -180px;
+	margin-bottom: 25px;
+}
+
+.bannerBttnWrapper-abs {
+	margin-left: 100%;
+	position: absolute;
+	left: -185px;
+	top: 42px;
+	z-index: 2;
+}
+
+.with-active-cutomer-panel .bannerBttnWrapper-abs {
+	left:-395px;
+}
+
+.bannerBttnWrapper a {
+	width: 80px;
+	text-align: center;
+	display: block;
+	margin: -2px 5px 0 0;
+	background-color: #fafafa;
+	border: 2px solid #CFE7F8;
+	border-top: 0;
+	height: 30px;
+	line-height: 30px;
+	color: #555;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+	padding: 0 21px 0 12px;
+	box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.systemcheck_content {
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	min-height:100px;
+	/*margin-top:-15px;*/
+	margin-left: -5px;
+	margin-right:-5px;
+	border-bottom: 2px solid #CFE7F8;
+	border-left: 2px solid #CFE7F8;
+	border-right: 2px solid #CFE7F8;
+	background-color: #fafafa;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.43);
+}
+.systemcheck-inner {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+a.hide_banner_open:hover {
+    text-decoration:none !important;
+    border-bottom: 2px solid #CFE7F8 !important;
+}
+a.hide_banner_closed:hover {
+	text-decoration:none !important;
+	border-bottom: 2px solid #CFE7F8 !important;
+}
+a.hide_banner_closed {
+	/*background: #F4F4F4 url(/../webapp/templates/admin/images/sitewide/gray_bg.png) repeat-x 0 0;
+	border: 2px solid #524747;
+	border-top: 0;
+	color:#fff;*/
+}
+
+</style>
+<div class="systemcheck_content">
+	<div class="systemcheck-inner"></div>
+</div>
+<div class="bannerBttnWrapper">
+	<a href="#" class="hide_banner_open">
+	<i class="icon-double-angle-up systemcheck_toggle_icon"></i>&nbsp;
+	<span class="systemcheck_toggle_text" style="display: inline;"><?php echo $this->user->lang("Hide");?></span>
+	</a>
+</div>
+
+<div style="clear:both;"></div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.systemcheck-inner').load("index.php?fuse=admin&view=viewsnapin&controller=snapins&plugin=systemcheck&v=listsystemchecks", function(){
+			<?php if ($this->gView == "dashboard") { ?>
+				$('.snapin_view_systemcheck').show();
+			<?php } else { ?>
+				$('.bannerBttnWrapper').addClass('bannerBttnWrapper-abs');
+				$('.systemcheck_content').hide();
+				$('.systemcheck_toggle_icon').removeClass('icon-double-angle-up').addClass('icon-double-angle-down');
+				$('.systemcheck_toggle_text').text(lang('Show'));
+				$('.snapin_view_systemcheck').show();
+				$('.hide_banner_open').removeClass('hide_banner_open').addClass('hide_banner_closed');
+			<?php } ?>
+		});
+
+		$('.hide_banner_open').on('click',function(){
+
+			//if show .. let's load again
+			if ( !$(".systemcheck_content").is(":visible") ) {
+				$('.ce-container .content').css('padding-top','0');
+				$('.bannerBttnWrapper-abs').removeClass('bannerBttnWrapper-abs');
+				$('.systemcheck-inner').load("index.php?fuse=admin&view=viewsnapin&controller=snapins&plugin=systemcheck&v=listsystemchecks");
+				$('.hide_banner_closed').removeClass('hide_banner_closed').addClass('hide_banner_open');
+				$(".maincontainer").animate({ scrollTop: 0 }, 600);
+			}
+
+			$('.systemcheck_content').slideToggle('400','linear',function(){
+
+
+				if ( $(".systemcheck_content").is(":visible") ) {
+					$('.systemcheck_toggle_icon').removeClass('icon-double-angle-down').addClass('icon-double-angle-up');
+					$('.systemcheck_toggle_text').text(lang('Hide'));
+				} else {
+					$('.systemcheck_toggle_icon').removeClass('icon-double-angle-up').addClass('icon-double-angle-down');
+					$('.systemcheck_toggle_text').text(lang('Show'));
+					$('.bannerBttnWrapper').addClass('bannerBttnWrapper-abs');
+					$('.hide_banner_open').removeClass('hide_banner_open').addClass('hide_banner_closed');
+					$('.ce-container .content').css('padding-top','<?php echo $this->padding_top;?>');
+				}
+
+			});
+		});
+
+		$('.ce-container .content').css('padding-top','<?php echo $this->padding_top;?>');
+
+	});
+</script>
+
